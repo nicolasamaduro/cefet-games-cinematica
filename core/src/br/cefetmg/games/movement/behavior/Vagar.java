@@ -2,6 +2,7 @@ package br.cefetmg.games.movement.behavior;
 
 import br.cefetmg.games.movement.Direcionamento;
 import br.cefetmg.games.movement.Pose;
+import com.badlogic.gdx.math.Vector3;
 
 /**
  *
@@ -35,6 +36,11 @@ public class Vagar extends Algoritmo {
     @Override
     public Direcionamento guiar(Pose agente) {
         Direcionamento output = new Direcionamento();
+        output.velocidade=agente.getOrientacaoComoVetor().clamp(maxVelocidade, maxVelocidade);
+        double aux=randomBinomial();
+        if (aux>maxAngular)
+            aux=maxAngular;
+        output.rotacao=aux;
 
         // Input: pose atual
         // ..

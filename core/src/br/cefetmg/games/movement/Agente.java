@@ -1,6 +1,7 @@
 package br.cefetmg.games.movement;
 
 import br.cefetmg.games.movement.behavior.Algoritmo;
+import br.cefetmg.games.movement.behavior.Chegar;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector3;
 
@@ -12,12 +13,12 @@ public class Agente {
 
     public Pose pose;
     private Algoritmo comportamento;
-
     public Color cor;
 
     public Agente(Vector3 posicao, Color cor) {
         this.pose = new Pose(posicao, 0);
         this.cor = cor;
+        
     }
 
     public void atualiza(float delta) {
@@ -25,7 +26,6 @@ public class Agente {
             // pergunta ao algoritmo de movimento (comportamento) 
             // para onde devemos ir
             Direcionamento direcionamento = comportamento.guiar(this.pose);
-
             // faz a simulação física usando novo estado da entidade cinemática
             pose.integra(direcionamento, delta);
 
@@ -42,7 +42,7 @@ public class Agente {
     public void defineComportamento(Algoritmo comportamento) {
         this.comportamento = comportamento;
     }
-
+   
     public Algoritmo getBehavior() {
         return comportamento;
     }

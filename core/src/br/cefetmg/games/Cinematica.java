@@ -34,6 +34,7 @@ public class Cinematica extends ApplicationAdapter {
     private Alvo objetivo;
     private Perseguir perseguir;
     private Vagar vagar;
+    private Chegar chegar;
     private Fugir fugir;
     private Algoritmo algoritmoCorrente;
 
@@ -52,7 +53,6 @@ public class Cinematica extends ApplicationAdapter {
                         (float) Math.random(), 1));
         agente.pose.orientacao = (float) (Math.random() * Math.PI * 2);
         agente.defineComportamento(algoritmoCorrente);
-
         agentes.add(agente);
         return agente;
     }
@@ -76,6 +76,9 @@ public class Cinematica extends ApplicationAdapter {
         vagar = new Vagar(40, 2);
         fugir = new Fugir(40);
         fugir.alvo = perseguir.alvo;
+        chegar = new Chegar(40);
+        chegar.alvo=objetivo;
+        
         algoritmoCorrente = vagar;
 
         agentes = new ArrayList<Agente>();
@@ -135,6 +138,9 @@ public class Cinematica extends ApplicationAdapter {
                         break;
                     case Keys.S:
                         algoritmoCorrente = perseguir;
+                        break;
+                    case Keys.C:
+                        algoritmoCorrente = chegar;
                         break;
                 }
                 return true;
@@ -221,3 +227,8 @@ public class Cinematica extends ApplicationAdapter {
         renderizadorObjetivo.update(Gdx.graphics.getDeltaTime());
     }
 }
+
+
+
+
+
